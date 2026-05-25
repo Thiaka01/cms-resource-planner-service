@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,6 +12,9 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "outbox_event")
 public class OutboxEvent {
@@ -32,7 +40,6 @@ public class OutboxEvent {
     @Column(name = "published_at")
     private Instant publishedAt;
 
-    protected OutboxEvent() {}
 
     public static OutboxEvent create(String aggregateType, UUID aggregateId, String eventType, String payload) {
         OutboxEvent e = new OutboxEvent();
@@ -45,21 +52,9 @@ public class OutboxEvent {
         return e;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public UUID getAggregateId() {
-        return aggregateId;
-    }
 
-    public String getEventType() {
-        return eventType;
-    }
 
-    public String getPayload() {
-        return payload;
-    }
 
     public void markPublished() {
         this.publishedAt = Instant.now();

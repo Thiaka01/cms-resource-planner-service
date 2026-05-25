@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,6 +15,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "planned_visit")
 public class PlannedVisit {
@@ -33,7 +41,6 @@ public class PlannedVisit {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    protected PlannedVisit() {}
 
     public static PlannedVisit create(LocalDate visitDate, UUID inspectorId) {
         PlannedVisit v = new PlannedVisit();
@@ -56,19 +63,7 @@ public class PlannedVisit {
         this.updatedAt = Instant.now();
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public LocalDate getVisitDate() {
-        return visitDate;
-    }
 
-    public UUID getInspectorId() {
-        return inspectorId;
-    }
 
-    public PlannedVisitStatus getStatus() {
-        return status;
-    }
 }

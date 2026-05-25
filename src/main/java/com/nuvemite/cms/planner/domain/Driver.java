@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,6 +12,9 @@ import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "driver")
 public class Driver {
@@ -31,7 +39,6 @@ public class Driver {
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    protected Driver() {}
 
     public static Driver create(UUID homePremiseId, String fullName, String licenseNumber, String phone) {
         Driver d = new Driver();
@@ -44,25 +51,10 @@ public class Driver {
         return d;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public UUID getHomePremiseId() {
-        return homePremiseId;
-    }
 
-    public String getFullName() {
-        return fullName;
-    }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
 
-    public String getPhone() {
-        return phone;
-    }
 
     public boolean isActive() {
         return active;

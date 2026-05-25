@@ -1,11 +1,19 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "license_type_planning_config")
 public class LicenseTypePlanningConfig {
@@ -26,7 +34,6 @@ public class LicenseTypePlanningConfig {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    protected LicenseTypePlanningConfig() {}
 
     public static LicenseTypePlanningConfig create(
             String licenseType, int expectedDurationMinutes, Integer maxPerInspectorPerDay, String updatedBy) {
@@ -46,15 +53,6 @@ public class LicenseTypePlanningConfig {
         this.updatedAt = Instant.now();
     }
 
-    public String getLicenseType() {
-        return licenseType;
-    }
 
-    public int getExpectedDurationMinutes() {
-        return expectedDurationMinutes;
-    }
 
-    public Integer getMaxPerInspectorPerDay() {
-        return maxPerInspectorPerDay;
-    }
 }

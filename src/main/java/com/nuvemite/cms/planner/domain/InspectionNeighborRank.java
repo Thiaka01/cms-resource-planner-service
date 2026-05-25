@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,6 +15,9 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "inspection_neighbor_rank")
 @IdClass(InspectionNeighborRank.NeighborId.class)
@@ -35,7 +43,6 @@ public class InspectionNeighborRank {
     @Column(name = "computed_at", nullable = false)
     private Instant computedAt;
 
-    protected InspectionNeighborRank() {}
 
     public static InspectionNeighborRank of(
             UUID inspectionRequestId,
@@ -53,25 +60,10 @@ public class InspectionNeighborRank {
         return n;
     }
 
-    public UUID getInspectionRequestId() {
-        return inspectionRequestId;
-    }
 
-    public UUID getNeighborRequestId() {
-        return neighborRequestId;
-    }
 
-    public int getRank() {
-        return rank;
-    }
 
-    public Integer getTravelDurationSeconds() {
-        return travelDurationSeconds;
-    }
 
-    public Integer getTravelDistanceMeters() {
-        return travelDistanceMeters;
-    }
 
     public static class NeighborId implements Serializable {
         private UUID inspectionRequestId;

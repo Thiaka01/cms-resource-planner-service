@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +17,9 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "inspection_date_message")
 public class InspectionDateMessage {
@@ -39,7 +47,6 @@ public class InspectionDateMessage {
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    protected InspectionDateMessage() {}
 
     public static InspectionDateMessage create(
             UUID inspectionRequestId,
@@ -58,31 +65,10 @@ public class InspectionDateMessage {
         return m;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public UUID getInspectionRequestId() {
-        return inspectionRequestId;
-    }
 
-    public InspectionAuthorRole getAuthorRole() {
-        return authorRole;
-    }
 
-    public String getAuthorUserId() {
-        return authorUserId;
-    }
 
-    public String getBody() {
-        return body;
-    }
 
-    public LocalDate[] getAttachedPreferredDates() {
-        return attachedPreferredDates;
-    }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
 }

@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +18,9 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "inspection_request")
 public class InspectionRequest {
@@ -75,7 +83,6 @@ public class InspectionRequest {
     @Version
     private long version;
 
-    protected InspectionRequest() {}
 
     public static InspectionRequest createApplication(
             UUID licenseApplicationId,
@@ -192,61 +199,19 @@ public class InspectionRequest {
         touch();
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public InspectionType getInspectionType() {
-        return inspectionType;
-    }
 
-    public DateStatus getDateStatus() {
-        return dateStatus;
-    }
 
-    public ResourceStatus getResourceStatus() {
-        return resourceStatus;
-    }
 
-    public UUID getLicenseApplicationId() {
-        return licenseApplicationId;
-    }
 
-    public UUID getLicenseGrantId() {
-        return licenseGrantId;
-    }
 
-    public UUID getComplaintId() {
-        return complaintId;
-    }
 
-    public UUID getCompanyId() {
-        return companyId;
-    }
 
-    public UUID getPremiseId() {
-        return premiseId;
-    }
 
-    public String getLicenseType() {
-        return licenseType;
-    }
 
-    public LocalDate[] getCompanyPreferredDates() {
-        return companyPreferredDates;
-    }
 
-    public LocalDate getPlannerProposedDate() {
-        return plannerProposedDate;
-    }
 
-    public LocalDate getConfirmedDate() {
-        return confirmedDate;
-    }
 
-    public LocalDate getScheduledDate() {
-        return scheduledDate;
-    }
 
     public void markSuggested() {
         this.resourceStatus = ResourceStatus.SUGGESTED;
@@ -263,11 +228,5 @@ public class InspectionRequest {
         return companyVisible;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
 }

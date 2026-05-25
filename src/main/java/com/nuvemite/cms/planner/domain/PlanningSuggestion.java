@@ -1,5 +1,10 @@
 package com.nuvemite.cms.planner.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,6 +15,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "planning_suggestion")
 public class PlanningSuggestion {
@@ -36,7 +44,6 @@ public class PlanningSuggestion {
     @Column(name = "created_by")
     private String createdBy;
 
-    protected PlanningSuggestion() {}
 
     public static PlanningSuggestion create(
             LocalDate from, LocalDate to, String suggestionJson, String createdBy) {
@@ -55,31 +62,10 @@ public class PlanningSuggestion {
         this.status = PlanningSuggestionStatus.APPLIED;
     }
 
-    public UUID getId() {
-        return id;
-    }
 
-    public LocalDate getRunDateFrom() {
-        return runDateFrom;
-    }
 
-    public LocalDate getRunDateTo() {
-        return runDateTo;
-    }
 
-    public PlanningSuggestionStatus getStatus() {
-        return status;
-    }
 
-    public String getSuggestionJson() {
-        return suggestionJson;
-    }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
 }
